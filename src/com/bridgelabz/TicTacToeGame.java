@@ -90,18 +90,18 @@ public class TicTacToeGame {
      */
     private static void checkFreeSpace()
     {
-        boolean isSpaceAvailable = true;
+        boolean isSpaceAvailable = false;
         int numOfFreeSpaces = 0;
         for(int index=1;index<board.length;index++)
         {
             if((board[index] == ' '))
             {
+                isSpaceAvailable = true;
                 numOfFreeSpaces++;
             }
         }
-        if(numOfFreeSpaces== 0)
+        if(isSpaceAvailable == false)
         {
-            isSpaceAvailable = false;
             System.err.println("Board is full! You can't make another move");
 
         }
