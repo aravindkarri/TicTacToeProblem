@@ -25,9 +25,7 @@ public class TicTacToeGame
             checkFreeSpace();
             winner();
         }
-
     }
-
     /**
      * UC1
      * Method Name: createEmptyBoard
@@ -42,7 +40,6 @@ public class TicTacToeGame
             board[index] = ' ';
         }
     }
-
     /**
      * UC2
      * Method Name: chooseLetter
@@ -73,10 +70,11 @@ public class TicTacToeGame
     }
     /**
      * UC4
-     * Method Name: makeMove
+     * Method Name: playerTurn
      * Description: method to make user to move to desired location
-     * Algorithm: It takes user input from index 1 to 9. If you enter invalid index or try to move
-     * to occupied position it prints error message else it moves the user letter to desired location.
+     * Algorithm: It takes user input from index 1 to 9.if player entered position contains free space
+     * then player can move to that location. Here we use break to get out from the while loop and
+     * executes the last statement.
      */
     private static void playerTurn()
     {
@@ -94,7 +92,6 @@ public class TicTacToeGame
         }
         System.out.println("Player choose:: " + playerMove);
         board[playerMove] = userLetter;
-
     }
     /**UC5
      * Method Name: checkFreeSpace
