@@ -50,7 +50,6 @@ public class TicTacToeGame {
      * UC3
      * Method Name: showBoard
      * Description: method to display current board
-     * Algorithm: it prints the every element in board array using println method.
      */
     private static void showBoard() {
         System.out.println(board[1] + " | " + board[2] + " | " + board[3]);
@@ -59,7 +58,6 @@ public class TicTacToeGame {
         System.out.println("----------");
         System.out.println(board[7] + " | " + board[8] + " | " + board[9]);
     }
-
     /**
      * UC4
      * Method Name: makeMove
@@ -67,26 +65,49 @@ public class TicTacToeGame {
      * Algorithm: It takes user input from index 1 to 9. If you enter invalid index or try to move
      * to occupied position it prints error message else it moves the user letter to desired location.
      */
-    private static void makeMove()
-    {
+    private static void makeMove() {
         Scanner scanner = new Scanner(System.in);
         System.out.println("Choose your location(1-9): ");
         int position = scanner.nextInt();
-        if (position > 9 && position < 1)
-        {
+        if (position > 9 && position < 1) {
             System.err.println("Enter a valid location b/w 1 to 9");
             makeMove();
-        }
-        else if (board[position] != ' ')
-        {
+        } else if (board[position] != ' ') {
             System.err.println("You already chosen this! Enter a valid location");
             makeMove();
+        } else {
+            board[position] = userLetter;
+            showBoard();
+            checkFreeSpace();
+            makeMove();
+        }
+    }
+    /**UC5
+     * Method Name: checkFreeSpace
+     * Description: method to check if space is available in the board.
+     * Algorithm: It checks free space is available or not before make a move and
+     * count the number of spaces available.It extends UC4.
+     */
+    private static void checkFreeSpace()
+    {
+        boolean isSpaceAvailable = true;
+        int numOfFreeSpaces = 0;
+        for(int index=1;index<board.length;index++)
+        {
+            if((board[index] == ' '))
+            {
+                numOfFreeSpaces++;
+            }
+        }
+        if(numOfFreeSpaces== 0)
+        {
+            isSpaceAvailable = false;
+            System.err.println("Board is full! You can't make another move");
+
         }
         else
         {
-            board[position] = userLetter;
-            showBoard();
-            makeMove();
+            System.out.println("Free space is available! you have "+numOfFreeSpaces+ " moves left");
         }
     }
 }
