@@ -17,8 +17,15 @@ public class TicTacToeGame
     {
         createEmptyBoard();
         chooseLetter();
-        showBoard();
-        makeMove();
+        while(true)
+        {
+            playerTurn();
+            computerTurn();
+            showBoard();
+            checkFreeSpace();
+            winner();
+        }
+
     }
 
     /**
@@ -71,29 +78,22 @@ public class TicTacToeGame
      * Algorithm: It takes user input from index 1 to 9. If you enter invalid index or try to move
      * to occupied position it prints error message else it moves the user letter to desired location.
      */
-    private static void makeMove()
+    private static void playerTurn()
     {
-        Scanner scanner = new Scanner(System.in);
-        System.out.println("Choose your location(1-9): ");
-        int position = scanner.nextInt();
-        if (position > 9 && position < 1)
+        int playerMove;
+        while (true)
         {
-            System.err.println("Enter a valid location b/w 1 to 9");
-            makeMove();
+            Scanner scanner = new Scanner(System.in);
+            System.out.println("Choose your location(1-9): ");
+            playerMove = scanner.nextInt();
+            if (board[playerMove] == ' ')
+            {
+                break;
+            }
+
         }
-        else if (board[position] != ' ')
-        {
-            System.err.println("You already chosen this! Enter a valid location");
-            makeMove();
-        }
-        else
-        {
-            board[position] = userLetter;
-            showBoard();
-            checkFreeSpace();
-            winner();
-            makeMove();
-        }
+        System.out.println("Player choose:: " + playerMove);
+        board[playerMove] = userLetter;
 
     }
     /**UC5
@@ -161,5 +161,26 @@ public class TicTacToeGame
             System.out.println("Player win the game");
             System.exit(0);
         }
+    }
+    /**UC8
+     * Method Name: computerTurn
+     * Description: method to make computer move to random location in board
+     * Algorithm: After user move, computer automatically move to random position using
+     * random method.
+     */
+    private static void computerTurn()
+    {
+        int computerMove;
+        while (true)
+        {
+            computerMove = (int) Math.floor(Math.random() * 10) % 9 + 1;
+            if (board[computerMove] == ' ')
+            {
+                break;
+            }
+
+        }
+        System.out.println("Computer choose:: " + computerMove);
+        board[computerMove] = computerLetter;
     }
 }
